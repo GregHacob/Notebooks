@@ -1,73 +1,60 @@
-import re
-
+from graph import Graph
+from kruskal import Kruskal
+from anagram import Anagram
+from palindromic import Palindromic
+import pdb
+ 
+    
 def question1(s, t):
-
-    foundAnagram = False
-    if len(t) <= len(s):
-        if charsExist(s,t):
-            for index in findOccurences(s,t[0]):
-                for i in range(len(t) + 1):
-                    try:
-                     if charsExist(s[index-len(t)+i:index+i],t):
-                      foundAnagram = True
-                    except IndexError:
-                     pass         
-    
-    return foundAnagram
-
-def charsExist(st1, st2):    
-    for chr in st2:     
-      if chr not in st1:
-        return False
-    return True
-
-def findOccurences(s, ch):
-    return [i for i, letter in enumerate(s) if letter == ch]    
-    
-
+    anagram_obj = Anagram(s,t)
+    return anagram_obj.isAnagram()
     
 def question2(a):
-   
-   charCounts = {}
-   a = a.lower()
-   a = removeSpecialChars(a)
-   
-   #Create a dictionary and count the number of each character in the string
-   for chr in a:
-    if chr in charCounts:
-        charCounts[chr]+=1
-    else:
-        charCounts[chr] = 1
-        
-   print charCounts
-   
-   #Find the largest odd value in the dictionary
-   maxOdd = getlargestOddValue(charCounts)
-   
-   palindromic = [charCounts.keys()[charCounts.values().index(maxOdd)]] * maxOdd
-   
-   #Find all the even values in the dictionary and add 
-   #half of the characters to the end of palindromic string and 
-   #the other half to the beginning
-   for key, value in charCounts.items():
-    if not value % 2:
-      sub = [key]* (value / 2)
-
-      palindromic[len(palindromic):] = sub
-      palindromic[:0] = sub
-   
-   #return palindromic list as string
-   return "".join(palindromic)
-   
-
-def getlargestOddValue(dict):
-    return max(i for i in dict.values() if i % 2)
-
-def removeSpecialChars(string):
- return re.sub("[^a-z]","", string)
+    palindromic_obj = Palindromic(a)
+    return palindromic_obj.longestPalindromic()    
      
-print question2("This is great")   
-
-#print question1("computerscience", "rest")
+def question3(G):
+    kruskal_obj = Kruskal(graph)
+    mst = kruskal_obj.buildMST()
+    return kruskal_obj.adjacencyList(mst)
+      
     
+print   
+print "QUESTION 1"    
+print question1("computerscience", "rest")
+print "*******************************************"
+print
 
+print "QUESTION 2"   
+print question2("This is great")  
+print "*******************************************"
+print
+
+print "QUESTION 3"
+graph = Graph()
+graph.insert_edge(3,"A","B")
+graph.insert_edge(2,"B","C")
+graph.insert_edge(9,"B","I")
+graph.insert_edge(9,"B","J")
+graph.insert_edge(4,"B","D")
+graph.insert_edge(2,"C","D")
+graph.insert_edge(8,"C","I")
+graph.insert_edge(9,"C","E")
+graph.insert_edge(9,"D","E")
+graph.insert_edge(6,"D","A")
+graph.insert_edge(4,"E","F")
+graph.insert_edge(7,"E","I")
+graph.insert_edge(5,"E","G")
+graph.insert_edge(1,"F","G")
+graph.insert_edge(4,"F","H")
+graph.insert_edge(3,"G","H")
+graph.insert_edge(10,"G","I")
+graph.insert_edge(10,"H","I")
+graph.insert_edge(18,"H","J")
+graph.insert_edge(8,"I","J")
+graph.insert_edge(9,"J","A")
+
+print question3(graph)     
+print "*******************************************"
+print
+  
