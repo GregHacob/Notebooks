@@ -2,6 +2,7 @@ from graph import Graph
 from kruskal import Kruskal
 from anagram import Anagram
 from palindromic import Palindromic
+from binarysearchtree import BST
 import pdb
  
     
@@ -17,7 +18,18 @@ def question3(G):
     kruskal_obj = Kruskal(graph)
     mst = kruskal_obj.buildMST()
     return kruskal_obj.adjacencyList(mst)
-      
+
+def question4(T, r, n1, n2):     
+    #create a Binary Search Tree with r as root  
+    bst = BST(r)
+    
+    #Populate the created binary search tree with matrix 
+    bst.populateBSTfromMatrix(T)
+    
+    print bst.print_tree()
+    
+
+    
     
 print   
 print "QUESTION 1"    
@@ -57,4 +69,13 @@ graph.insert_edge(9,"J","A")
 print question3(graph)     
 print "*******************************************"
 print
+
+question4([[0, 1, 0, 0, 0],
+           [0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0],
+           [1, 0, 0, 0, 1],
+           [0, 0, 0, 0, 0]],
+            3,
+            1,
+            4)
   
