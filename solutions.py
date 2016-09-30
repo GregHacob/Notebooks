@@ -3,6 +3,7 @@ from kruskal import Kruskal
 from anagram import Anagram
 from palindromic import Palindromic
 from binarysearchtree import BST
+from lca import LCA
 import pdb
  
     
@@ -23,11 +24,13 @@ def question4(T, r, n1, n2):
     #create a Binary Search Tree with r as root  
     bst = BST(r)
     
-    #Populate the created binary search tree with matrix 
-    bst.populateBSTfromMatrix(T)
-    
+    #Populate the created binary search tree with matrix T
+    bst.populateBSTfromMatrix(T)  
     print bst.print_tree()
     
+    #pdb.set_trace()
+    lca = LCA(bst, n1, n2)
+    return lca.findLCA()
 
     
     
@@ -42,7 +45,7 @@ print question2("This is great")
 print "*******************************************"
 print
 
-print "QUESTION 3"
+print "QUESTION 3" 
 graph = Graph()
 graph.insert_edge(3,"A","B")
 graph.insert_edge(2,"B","C")
@@ -65,17 +68,19 @@ graph.insert_edge(10,"H","I")
 graph.insert_edge(18,"H","J")
 graph.insert_edge(8,"I","J")
 graph.insert_edge(9,"J","A")
-
 print question3(graph)     
 print "*******************************************"
 print
 
-question4([[0, 1, 0, 0, 0],
-           [0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0],
-           [1, 0, 0, 0, 1],
-           [0, 0, 0, 0, 0]],
-            3,
-            1,
-            4)
-  
+
+print "QUESTION 4"   
+print question4([[0, 1, 0, 0, 0],
+                 [0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0],
+                 [1, 0, 0, 0, 1],
+                 [0, 0, 0, 0, 0]],
+                 3,
+                 1,
+                 4)
+print "*******************************************"
+print
