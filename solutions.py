@@ -4,6 +4,7 @@ from anagram import Anagram
 from palindromic import Palindromic
 from binarysearchtree import BST
 from lca import LCA
+from linkedlist import LinkedList, Node
 import pdb
  
     
@@ -32,6 +33,8 @@ def question4(T, r, n1, n2):
     lca = LCA(bst, n1, n2)
     return lca.findLCA()
 
+def question5(ll,n):  
+    return ll.nthToLast(n).data 
     
     
 print   
@@ -84,3 +87,18 @@ print question4([[0, 1, 0, 0, 0],
                  4)
 print "*******************************************"
 print
+
+print "QUESTION 5"  
+# Test cases
+# Set up some the linked list and the head node
+ll = LinkedList(Node(1))
+
+# Append nodes to the Linked List
+for i in range(2,10):
+ ll.append(Node(i))
+
+#pdb.set_trace()
+print question5(ll,3)
+print "*******************************************"
+print
+
