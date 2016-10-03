@@ -2,25 +2,48 @@ class Anagram():
  def __init__(self, s, t):
     self.s = s
     self.t = t
- 
- def isAnagram(self):
-    foundAnagram = False
-    if len(self.t) <= len(self.s):
-        if self.charsExist(self.s,self.t):
-            for index in self.findOccurences(self.s,self.t[0]):
-                for i in range(len(self.t) + 1):
-                    try:
-                     if self.charsExist(self.s[index-len(self.t)+i:index+i],self.t):
-                      foundAnagram = True
-                    except IndexError:
-                     pass           
-    return foundAnagram
+    
+ def findAnagram(self): 
+    t_length = len(self.t)
+    for i in range(len(self.s) - t_length + 1):
+     if self.isAnagram(self.s[i:i + t_length], self.t):
+      return True
+    return False  
 
- def charsExist(self, st1, st2):    
-    for chr in st2:     
-      if chr not in st1:
+ def isAnagram(self,s,t):
+    c1 = [0]*26
+    c2 = [0]*26
+    
+    if len(t) == 0:
         return False
-    return True
+     
+    if len(s) < len(t):
+        return False
+        
+    for i in range(len(s)):
+        pos = ord(s[i])-ord('a')
+        if pos < 0:
+         return False
+        else: 
+         c1[pos] = c1[pos] + 1
 
- def findOccurences(delf, s, ch):
-    return [i for i, letter in enumerate(s) if letter == ch]    
+    for i in range(len(t)):
+        pos = ord(t[i])-ord('a')
+        if pos < 0:
+         return False
+        else:
+         c2[pos] = c2[pos] + 1
+
+    j = 0
+    foundAnagram = True
+    while j<26 and foundAnagram:
+        if c1[j]>=c2[j]:
+            j = j + 1
+        else:
+            foundAnagram = False
+
+    return foundAnagram 
+    
+
+
+    
