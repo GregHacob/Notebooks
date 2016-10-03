@@ -10,7 +10,7 @@ import pdb
     
 def question1(s, t):
     anagram_obj = Anagram(s,t)
-    return anagram_obj.isAnagram()
+    return anagram_obj.findAnagram()
     
 def question2(a):
     palindromic_obj = Palindromic(a)
@@ -38,8 +38,14 @@ def question5(ll,n):
     
     
 print   
-print "QUESTION 1"    
-print question1("computerscience", "rest")
+print "TEST CASES FOR QUESTION 1" 
+print "*******************************************"
+#Should print True   
+print question1("computerscience", "crest")
+#Should print False   
+print question1(" ", "test")
+#Should print False   
+print question1("!$%#@^&@#", "")
 print "*******************************************"
 print
 
