@@ -1,6 +1,6 @@
-class Element(object):
-    def __init__(self, value):
-        self.value = value
+class Node(object):
+    def __init__(self, data):
+        self.data = data
         self.next = None
         
 class LinkedList(object):
@@ -27,6 +27,19 @@ class LinkedList(object):
             current = current.next
             counter += 1
         return None
+        
+    def nthToLast(self, n):
+        counter = 1
+        mthelement = self.head
+        current = self.head
+        if n < 1:
+            return None
+        while current:
+            current = current.next            
+            if counter > n:               
+                mthelement = mthelement.next                
+            counter += 1    
+        return mthelement   
     
     def insert(self, new_element, position):
         counter = 1
@@ -45,10 +58,10 @@ class LinkedList(object):
     def delete(self, value):
         current = self.head
         previous = None
-        while current.value != value and current.next:
+        while current.data != value and current.next:
             previous = current
             current = current.next
-        if current.value == value:
+        if current.data == value:
             if previous:
                 previous.next = current.next
             else:
