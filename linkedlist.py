@@ -38,7 +38,9 @@ class LinkedList(object):
             current = current.next            
             if counter > n:               
                 mthelement = mthelement.next                
-            counter += 1    
+            counter += 1  
+        if counter < n:
+            return False
         return mthelement   
     
     def insert(self, new_element, position):
