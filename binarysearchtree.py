@@ -34,7 +34,8 @@ class BST(BinaryTree):
         
     def populateBSTfromMatrix(self, T):
         self.T = T
-        self.addNode(self.root.value)
+        if len(T) > 1:
+         self.addNode(self.root.value)
     
     def addNode(self, r):
         for i in range(len(self.T[r])):
