@@ -1,6 +1,26 @@
+Question1:
+Assuming that the two strings in question are of equal length, string 't' is an anagram of string 's', if string 't' have equal number of the same characters in string 's'. If the ‘t’ and ‘s’ are not the same length, then we will find out whether or not the substrings of ‘s’ with the length of string ‘t’ are anagram. 
+The first two iterations used to count the characters are both based on n. The third iteration, comparing the two lists of counts, always takes 26 steps since there are 26 possible characters in the strings. Adding it all up gives us 2n+26 steps. That is O(n) and a linear order of magnitude algorithm for solving this problem if string ‘s’ and ‘t’ are the same length. If they are not the same length, we will have a nested loop that goes through each substring of ‘s’ and uses IsAnagram to evaluate. Thus, the O(n^2) is the algorithm efficiency. The space efficiency is that we allocate 2 arrays of 26 character, thus the space efficiency is a constant.
 
-Assuming that the two strings in question are of equal length, string 't' is an anagram of string 's', if string 't' have equal number of the same characters in string 's'. In order to decide whether two strings are anagrams, we will first count the number of times each character occurs in string 't' and string 's' and store it in 2 different lists. In the end, we compare the 2 lists and if the number of occurrences of each character in string 't' is equal than the same character in string 's’, then ‘t’ is an anagram of ‘s’. (isAnagram method). 
-If the ‘t’ and ‘s’ are not the same length, then we will use findAnagram method to find out whether or not the substrings of ‘s’ with the length of string ‘t’ are anagram. We will start the substring search from index 0 with the length of string ‘t’ and use isAnagram method to evaluate. We will move the substring index by 1 and evaluate until we reach the last substring of the ‘s’ with the length of ‘t’
-In isAnagram, the first two iterations used to count the characters are both based on n. The third iteration, comparing the two lists of counts, always takes 26 steps since there are 26 possible characters in the strings. Adding it all up gives us 2n+26 steps. That is O(n) and a linear order of magnitude algorithm for solving this problem if string ‘s’ and ‘t’ are the same length. If they are not the same length, we will have a nested loop that goes through each substring of ‘s’ and uses IsAnagram to evaluate. Thus, the O(n^2) is the algorithm efficiency.
+Question2:
+Given the string ‘a’, we move forward one character at a time and compare the 2 characters around it, if those two characters are equal, we will add count by 1 and compare the 2 characters that are 2 indexes away from that character and so on. We will calculate this for all the characters in string 'a' and store the counts into a list. At the end, we will have a list of numbers where the index of the list is the location of each character in string 'a', and the value is the number of characters around it that are equal(palindromic). The largest value in the list will give us the largest palindrome substring.
+Since there is a nested loop, where one is going through all the characters of string 'a' and another loop to compare the characters around it; the efficiency of this algorithm is O(n^2). The space efficiency is O(n) since we use a list with n elements.
+
+
+Question3:
+For this problem I used Kruskal's algorithm which is a minimum-spanning-tree algorithm. Below are the steps for finding MST using Kruskal’s algorithm.
+1. Sort all the edges in ascending order of their weight.
+2. Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. If cycle is not formed, include this edge. Else, discard it.  
+3. Repeat step#2 until there are (V-1) edges in the spanning tree.
+Where E is the number of edges in the graph and V is the number of vertices, Kruskal's algorithm can be shown to run in O(E log V) time.
+Sorting of edges takes O(ELogE) time. After sorting, we iterate through all edges and apply find-connect algorithm. The find and connect operations can take atmost O(LogV) time. So overall complexity is O(ELogE + ELogV) time. The value of E can be atmost V^2, so O(LogV) are O(LogE) same. Therefore, overall time complexity is O(ElogE) or O(ElogV)
+
+Question4:
+In a BST we compare both values with a given node (starting from the root). In case the node’s value is in between them – this is the lowest common ancestor. If not – we go either on the left or on the right! We can recursively traverse the BST from root. The main idea of the solution is, while traversing from top to bottom, the first node n we encounter with value between n1 and n2, i.e., n1 < n < n2 or same as one of the n1 or n2, is LCA of n1 and n2 (assuming that n1 < n2). So just recursively traverse the BST in, if node’s value is greater than both n1 and n2 then our LCA lies in left side of the node, if it’s is smaller than both n1 and n2, then LCA lies on right side. Otherwise root is LCA (assuming that both n1 and n2 are present in BST
+Time complexity of above solution is O(h) where h is height of tree. Also, the above solution requires O(h) extra space in function call stack for recursive function calls. We can avoid extra space using iterative solution.
+
+Question5:
+We will keep track of two references in the linked list and Initialize both to head. First move the first reference to n nodes from head. Now move both pointers one by one until reference reaches end. Now main pointer will point to nth node from the end. Return main pointer.
+O(n) where n is the length of linked list.
 
 
