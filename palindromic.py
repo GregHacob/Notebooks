@@ -2,43 +2,47 @@ import re
 
 class Palindromic():
 
- def __init__(self, st):
-  self.st = st
-  
- def longestPalindromic(self):   
-   charCounts = {}
-   self.st = self.st.lower()
-   self.st = self.removeSpecialChars(self.st)
+ def __init__(self, st):  
+    st = st.lower()
+    st = self.removeSpecialChars(st)
+    self.st = st
+ 
+ def longestPalindromic(self):
+    palindromic = [0]*len(self.st)     
+    length = len(self.st)
+    
+    #special cases when the string is empty, has 1, or 2 characters  
+    if length == 0:
+     return None
+    elif length == 1:
+     return self.st 
+    elif length == 2:
+      if self.st[0] == self.st[1]:
+        return self.st
+      else:
+        return None
    
-   #Create a dictionary and count the number of each character in the string
-   for chr in self.st:
-    if chr in charCounts:
-        charCounts[chr]+=1
-    else:
-        charCounts[chr] = 1
-   
-   #Find the largest odd value in the dictionary
-   maxOdd = self.getlargestOddValue(charCounts)
-  
-   #create a list and add the key of the largest odd number value in trhe dictionary, maxOdd times
-   palindromic = [charCounts.keys()[charCounts.values().index(maxOdd)]] * maxOdd
-   
-   #Find all the even values in the dictionary and add 
-   #half of the characters to the end of palindromic string and 
-   #the other half to the beginning
-   for key, value in charCounts.items():
-    if not value % 2:
-      sub = [key]* (value / 2)
+    for i in range(1,len(self.st)-1):
+     if i<=length-i:
+      c_range = i
+     else:
+      c_range = length - i - 1
+     count = 0
+     for j in range(1,c_range+1):
+       if self.st[i-j] == self.st[i+j]:
+        count+=1
+       else:
+        break
+     palindromic[i] = count   
 
-      palindromic[len(palindromic):] = sub
-      palindromic[:0] = sub
-   
-   #return palindromic list as string
-   return "".join(palindromic)
-   
-
- def getlargestOddValue(self, dict):
-    return max(i for i in dict.values() if i % 2)
+    max_v = max(palindromic)
+    
+    #special case when there are no palindromes
+    if max_v == 0:
+     return None
+     
+    max_v_index = palindromic.index(max_v)
+    return self.st[max_v_index-max_v:max_v_index+max_v+1]   
  
  def removeSpecialChars(self, string):
     return re.sub("[^a-z]","", string)
